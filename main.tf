@@ -32,5 +32,5 @@ resource "aws_route53_record" "dns_rebrain" {
 }
 
 output "server_ip" {
-  value = data.hcloud_ssh_key.devops.id,hcloud_ssh_key.a23uk_key.id
+  value = data.hcloud_server.serverinfo.id
 }
