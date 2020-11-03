@@ -19,18 +19,23 @@ resource "hcloud_server" "devops_23uk" {
   ssh_keys =  [data.hcloud_ssh_key.devops.id,hcloud_ssh_key.a23uk_key.id]
 }
 
-resource "aws_route53_zone" "dns" {
-  name = "devops.rebrain.srwx.net"
+data "aws_route53_zone" "dns" {
+  name         = "devops.rebrain.srwx.net."
+  private_zone = false
 }
 
 resource "aws_route53_record" "dns_rebrain" {
-  allow_overwrite = true
-  name            = "23uk.devops.rebrain.srwx.net"
-  ttl             = 30
-  type            = "A"
-  zone_id         = data.hcloud_server.serverinfo.ipv4_address
+  zone_id = data.aws_route53_zone.dns.zone_id
+  name    = "23uk.devops.rebrain.srwx.net"
+  type    = "A"
+  ttl     = "30"
+  records = [data.hcloud_server.serverinfo.ipv4_address]
 }
 
 output "server_ip" {
-  value = data.hcloud_server.serverinfo.id
+  value = data.hcloud_server.serverinfo.ipv4_address
+}
+
+output "aws_route53_zone" {
+  value = data.aws_route53_zone.dns.zone_id
 }
