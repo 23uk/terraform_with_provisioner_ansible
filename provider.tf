@@ -3,7 +3,7 @@ provider "hcloud" {
 }
 
 provider "aws" {
-  access_key = "AKIAZMJMH6DA3THRGMQC"
-  secret_key = "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"
+  access_key = var.aws_access_key
+  secret_key = var.aws_secret_key
   region = "eu-central-1"
 }
