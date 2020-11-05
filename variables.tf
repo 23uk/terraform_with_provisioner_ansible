@@ -17,9 +17,9 @@ type=string
 #type=string
 #}
 
-#variable "subdomain" {
-#type=list
-#}
+variable "domains" {
+type=list
+}
 
 
 
