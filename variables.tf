@@ -13,4 +13,13 @@ variable "aws_secret_key" {
 type=string
 }
 
+#variable "zone_id" {
+#type=string
+#}
+
+#variable "subdomain" {
+#type=list
+#}
+
+
 
