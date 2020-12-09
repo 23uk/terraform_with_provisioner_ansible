@@ -1,5 +1,6 @@
 # Local .terraform directories
 **/.terraform/*
+**/.ssh/*
 
 # .tfstate files
 *.tfstate
@@ -33,3 +34,5 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+#Ansible roles
+**/roles/wcm_io_devops.apache/*

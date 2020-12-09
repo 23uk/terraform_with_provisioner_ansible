@@ -21,5 +21,11 @@ variable "domains" {
 type=list
 }
 
-
+variable "connection" {
+  default = {
+    user        = "root"
+    type        = "ssh"
+    private_key = "/root/.ssh/id_rsa"
+  }
+}
 
