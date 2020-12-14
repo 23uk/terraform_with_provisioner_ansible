@@ -1,0 +1,23 @@
+---
+- name: Install NGINX
+  hosts: all
+  become: yes
+  tasks:
+  - name: Install epel-release
+    yum: name=epel-release state=latest
+  - name: Install Nginx
+    yum: name=nginx
+  - name: Autostart webserver
+    service: name=nginx state=started enabled=yes
+- name: Configuring Nginx 23uk-1
+  hosts: 23uk-1.devops.rebrain.srwx.net
+  become: yes
+  tasks:
+  - name: Generate nginx.conf
+    template: src=nginx/nginx1.j2 dest=/etc/nginx/nginx.conf mode=0644
+    notify: Reload nginx
+  - name: Copy hostname1
+    template: src=hostname/hostname1 dest=/etc/hostname mode=0644
+  handlers:
+  - name: Reload nginx
+    service: name=nginx state=reloaded
