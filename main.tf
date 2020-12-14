@@ -15,7 +15,7 @@ data "aws_route53_zone" "dns" {
 resource "aws_route53_record" "dns_rebrain" {
   count   = length(var.domains)
   zone_id = data.aws_route53_zone.dns.zone_id
-  name    = "23uk-${element(var.domains, count.index)}.devops.rebrain.srwx.net"
+  name    = "23uk-${element(var.domains, count.index)}.${data.aws_route53_zone.dns.name}"
   type    = "A"
   ttl     = "30"
   records = [element(hcloud_server.devops_23uk[*].ipv4_address, count.index)]
@@ -31,8 +31,8 @@ resource "hcloud_server" "devops_23uk" {
     module = "devops"
     email  = "23uk_at_tut_by"
   }
-#  location   = "nbg1"
-  location   = "hel1"
+  location   = "nbg1"
+#  location   = "hel1"
   ssh_keys =  [data.hcloud_ssh_key.devops.id,hcloud_ssh_key.a23uk_key.id]
 
   connection {
